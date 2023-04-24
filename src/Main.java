@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
@@ -13,10 +14,7 @@ public class Main {
             String line = reader.readLine();
             while (line != null) {
                 String[] parts = line.split(",");
-                ArrayList<String> userInfo = new ArrayList<>();
-                for (String part : parts) {
-                    userInfo.add(part);
-                }
+                ArrayList<String> userInfo = new ArrayList<>(Arrays.asList(parts));
                 users.add(userInfo);
                 line = reader.readLine();
             }
@@ -57,7 +55,7 @@ public class Main {
             String firstName = JOptionPane.showInputDialog("Enter first name");
             String lastName = JOptionPane.showInputDialog("Enter last name");
 
-            ArrayList<String> userInfo = new ArrayList<String>();
+            ArrayList<String> userInfo = new ArrayList<>();
             userInfo.add(username);
             userInfo.add(password);
             userInfo.add(firstName);

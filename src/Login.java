@@ -1,6 +1,6 @@
 public class Login {
 
-    public static boolean checkPasswordComplexity(String password) {
+    public boolean checkPasswordComplexity(String password) {
         String capitalRegex = ".*[A-Z].*";
         String numberRegex = ".*\\d.*";
         String specialCharRegex = ".*[!@#$%^&*()].*";
@@ -12,7 +12,7 @@ public class Login {
 
         return hasCapital && hasNumber && hasSpecialChar && hasMinLength;
     }
-    public static boolean checkUsernameComplexity(String username) {
+    public boolean checkUsernameComplexity(String username) {
         String underscoreRegex = ".*_.*";
 
         boolean hasUnderscore = username.matches(underscoreRegex);
