@@ -1,4 +1,6 @@
 public class User {
+
+    // create a user class to store the user's info
     private String password;
     private String username;
     private String firstName;
@@ -8,6 +10,7 @@ public class User {
         return password;
     }
 
+    // getters and setters for user class
     public void setPassword(String password) {
         this.password = password;
     }
@@ -36,6 +39,7 @@ public class User {
         this.lastName = lastName;
     }
 
+    // constructor for user class
     public User(String password, String username, String firstName, String lastName) {
         this.password = password;
         this.username = username;
