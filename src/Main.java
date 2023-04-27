@@ -13,19 +13,20 @@ public class Main {
 
         try {
             // Use a buffered reader to read the file
-            BufferedReader br = new BufferedReader(new FileReader("users.txt"));
-            String line = br.readLine();
+            BufferedReader reader = new BufferedReader(new FileReader("users.txt"));
+            String line = reader.readLine();
 
             // read the file line by line and add each line to the users arraylist
             while (line != null) {
+                // split the line by commas
                 String[] parts = line.split(",");
                 // create an arraylist to store the user's info
                 ArrayList<String> userInfo = new ArrayList<>(Arrays.asList(parts));
                 users.add(userInfo);
-                line = br.readLine();
+                line = reader.readLine();
             }
             // close the buffered reader
-            br.close();
+            reader.close();
 
         } catch (IOException e) {
             // print the stack trace if an exception occurs
@@ -33,6 +34,7 @@ public class Main {
         }
         // create an array of options for the user to choose from
         String[] options = {"Login", "Register"};
+        // create a variable to store the user's choice
         int choice = JOptionPane.showOptionDialog(null, "Login or Register", "Login/Register", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
 
         // create a boolean to check if the user exists
