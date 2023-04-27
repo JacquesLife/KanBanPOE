@@ -96,6 +96,8 @@ public class Main {
                     e.printStackTrace();
                 }
                 JOptionPane.showMessageDialog(null, "Welcome " + firstName + " " + lastName);
+                // set userExists to true and break out of the loop
+                break;
             }
         }
     }
