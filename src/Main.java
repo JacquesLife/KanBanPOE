@@ -13,8 +13,8 @@ public class Main {
 
         try {
             // Use a buffered reader to read the file
-            BufferedReader reader = new BufferedReader(new FileReader("users.txt"));
-            String line = reader.readLine();
+            BufferedReader br = new BufferedReader(new FileReader("userInfo.txt"));
+            String line = br.readLine();
 
             // read the file line by line and add each line to the users arraylist
             while (line != null) {
@@ -23,10 +23,10 @@ public class Main {
                 // create an arraylist to store the user's info
                 ArrayList<String> userInfo = new ArrayList<>(Arrays.asList(parts));
                 users.add(userInfo);
-                line = reader.readLine();
+                line = br.readLine();
             }
             // close the buffered reader
-            reader.close();
+            br.close();
 
         } catch (IOException e) {
             // print the stack trace if an exception occurs
@@ -88,13 +88,14 @@ public class Main {
 
                 try {
                     // Use a buffered writer to write to the file
-                    BufferedWriter writer = new BufferedWriter(new FileWriter("users.txt", true));
-                    writer.write(String.join(",", userInfo));
-                    writer.newLine();
-                    writer.close();
+                    BufferedWriter bw = new BufferedWriter(new FileWriter("userInfo.txt", true));
+                    bw.write(String.join(",", userInfo));
+                    bw.newLine();
+                    bw.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+
                 JOptionPane.showMessageDialog(null, "Welcome " + firstName + " " + lastName);
                 // set userExists to true and break out of the loop
                 break;

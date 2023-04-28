@@ -2,9 +2,9 @@ public class Login {
 
     public boolean checkPasswordComplexity(String password) {
         // Regex for password complexity
-        String capitalRegex = ".*[A-Z].*";
-        String numberRegex = ".*\\d.*";
-        String specialCharRegex = ".*[!@#$%^&*()].*";
+        String capitalRegex = ".*[A-Z].*"; // Must contain a capital letter
+        String numberRegex = ".*\\d.*"; // Must contain a number
+        String specialCharRegex = ".*[!@#$%^&*()].*"; // Must contain a special character
 
         boolean hasCapital = password.matches(capitalRegex);
         boolean hasNumber = password.matches(numberRegex);
@@ -15,7 +15,7 @@ public class Login {
     }
     public boolean checkUsernameComplexity(String username) {
         // Regex for username complexity
-        String underscoreRegex = ".*_.*";
+        String underscoreRegex = ".*_.*"; // Must contain an underscore
 
         boolean hasUnderscore = username.matches(underscoreRegex);
         boolean hasMaxLength = username.length() <= 5; // Max length of 5
