@@ -9,7 +9,9 @@ class Backend {
         users = new ArrayList<>();
     }
 
+
     public void loadUsers() {
+    // load users from file
         try {
             BufferedReader br = new BufferedReader(new FileReader("userInfo.txt"));
             String line = br.readLine();
@@ -27,7 +29,9 @@ class Backend {
         }
     }
 
+    // check if user exists
     public boolean isUserValid(String username, String password) {
+        // check if user exists
         for (ArrayList<String> user : users) {
             if (user.get(0).equals(username) && user.get(1).equals(password)) {
                 return true;
@@ -37,6 +41,7 @@ class Backend {
     }
 
     public ArrayList<String> getUser(String username) {
+        // return user info
         for (ArrayList<String> user : users) {
             if (user.get(0).equals(username)) {
                 return user;
@@ -46,6 +51,7 @@ class Backend {
     }
 
     public void registerUser(String username, String password, String firstName, String lastName) {
+        // add user to users arraylist
         ArrayList<String> userInfo = new ArrayList<>();
         userInfo.add(username);
         userInfo.add(password);
@@ -54,6 +60,7 @@ class Backend {
         users.add(userInfo);
 
         try {
+            // write user info to file
             BufferedWriter bw = new BufferedWriter(new FileWriter("userInfo.txt", true));
             bw.write(String.join(",", userInfo));
             bw.newLine();

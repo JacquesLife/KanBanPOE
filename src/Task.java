@@ -1,3 +1,5 @@
+import javax.swing.*;
+
 public class Task {
     private final String taskName;
     private final int taskNumber;
@@ -6,6 +8,7 @@ public class Task {
     private final String developerLastName;
     private final int taskDuration;
     private final String taskID;
+    private WorkerClass.TaskStatus taskStatus; // Add taskStatus field
 
     public Task(String taskName, int taskNumber, String taskDescription, String developerFirstName, String developerLastName, int taskDuration, String taskID) {
         this.taskName = taskName;
@@ -18,9 +21,22 @@ public class Task {
     }
 
     public String printTaskDetails() {
-        return "Task Status: \nDeveloper Details: " + developerFirstName + " " + developerLastName +
+        // Add taskStatus to the printTaskDetails method
+        return "Task Status: " + taskStatus + "\nDeveloper Details: " + developerFirstName + " " + developerLastName +
                 "\nTask Number: " + taskNumber + "\nTask Name: " + taskName +
                 "\nTask Description: " + taskDescription + "\nTask ID: " + taskID +
                 "\nTask Duration: " + taskDuration + " hours";
+    }
+
+    public int getTaskDuration() {
+        return taskDuration;
+    }
+
+    public WorkerClass.TaskStatus getTaskStatus() {
+        return taskStatus;
+    }
+
+    public void setTaskStatus(WorkerClass.TaskStatus taskStatus) {
+        this.taskStatus = taskStatus;
     }
 }
