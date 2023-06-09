@@ -1,7 +1,12 @@
+/*
+this class is responsible for loading users from file, checking if user exists, getting user info, and registering new users
+it does this by using an arraylist of arraylists to store the user info
+bufferedreader is used to read the file and string.split is used to split the line into an array of strings
+bufferedwriter is used to write to the file
+*/
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-
 class Backend {
     private final ArrayList<ArrayList<String>> users;
 
@@ -71,3 +76,4 @@ class Backend {
     }
 }
 
+//--------------------------------------------▄︻̷̿┻̿═━一-End of File-一━═┻̿┷̿︻▄-----------------------------------------------//

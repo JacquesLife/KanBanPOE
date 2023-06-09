@@ -1,4 +1,9 @@
-import javax.swing.*;
+/*
+this class is used to create a task object and store the task details.
+it makes use of the WorkerClass.TaskStatus enum to store the task status
+this class also has a printTaskDetails method to print the task details
+ */
+
 
 public class Task {
     private final String taskName;
@@ -32,11 +37,9 @@ public class Task {
         return taskDuration;
     }
 
-    public WorkerClass.TaskStatus getTaskStatus() {
-        return taskStatus;
-    }
-
     public void setTaskStatus(WorkerClass.TaskStatus taskStatus) {
         this.taskStatus = taskStatus;
     }
 }
+
+//--------------------------------------------▄︻̷̿┻̿═━一-End of File-一━═┻̿┷̿︻▄-----------------------------------------------//

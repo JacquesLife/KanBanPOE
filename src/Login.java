@@ -1,3 +1,9 @@
+/*
+this class is used to check the complexity of the username and password
+it makes use of regex to check if the username and password meet the requirements
+ */
+
+
 public class Login {
 
     public boolean checkPasswordComplexity(String password) {
@@ -23,3 +29,5 @@ public class Login {
         return hasUnderscore && hasMaxLength; // Return true if all conditions are met
     }
 }
+
+//--------------------------------------------▄︻̷̿┻̿═━一-End of File-一━═┻̿┷̿︻▄-----------------------------------------------//

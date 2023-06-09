@@ -1,3 +1,8 @@
+/*
+this class is the backend for the user class and provides getters and setters for the user class
+ */
+
+
 public class User {
 
     // create a user class to store the user's info
@@ -47,3 +52,5 @@ public class User {
         this.lastName = lastName;
     }
 }
+
+//--------------------------------------------▄︻̷̿┻̿═━一-End of File-一━═┻̿┷̿︻▄-----------------------------------------------//

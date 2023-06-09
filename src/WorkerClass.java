@@ -1,3 +1,17 @@
+/*
+this class is responsible for performing the login or register operation, adding tasks, displaying tasks, calculating total hours, saving users, saving tasks, loading users and loading tasks.
+it does this by creating a backend object and a login object and calling the methods from these classes.
+ArrayList<Task> tasks is used to store the tasks that are created.
+addTask() is used to add a task to the tasks' arraylist.
+displayTasks() is used to display the tasks in the tasks' arraylist.
+calculateTotalHours() is used to calculate the total hours of all the tasks in the tasks' arraylist.
+saveUsers() is used to save the users to a file.
+saveTasks() is used to save the tasks to a file.
+loadUsers() is used to load the users from a file.
+loadTasks() is used to load the tasks from a file.
+performLoginOrRegister() is used to perform the login or register operation.
+performOperations() is used to perform the add task, display tasks, calculate total hours, save users, save tasks, load users and load tasks operations.
+*/
 import javax.swing.*;
 import java.util.ArrayList;
 
@@ -259,3 +273,5 @@ public class WorkerClass {
         worker.performOperations();
     }
 }
+
+//--------------------------------------------▄︻̷̿┻̿═━一-End of File-一━═┻̿┷̿︻▄-----------------------------------------------//
