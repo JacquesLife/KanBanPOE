@@ -1,9 +1,8 @@
 /*
 this class is used to create a task object and store the task details.
-it makes use of the WorkerClass.TaskStatus enum to store the task status
+iit makes use of the WorkerClass.TaskStatus enum to store the task status
 this class also has a printTaskDetails method to print the task details
  */
-
 
 public class Task {
     private final String taskName;
@@ -13,7 +12,7 @@ public class Task {
     private final String developerLastName;
     private final int taskDuration;
     private final String taskID;
-    private WorkerClass.TaskStatus taskStatus; // Add taskStatus field
+    private WorkerClass.TaskStatus taskStatus;
 
     public Task(String taskName, int taskNumber, String taskDescription, String developerFirstName, String developerLastName, int taskDuration, String taskID) {
         this.taskName = taskName;
@@ -26,7 +25,6 @@ public class Task {
     }
 
     public String printTaskDetails() {
-        // Add taskStatus to the printTaskDetails method
         return "Task Status: " + taskStatus + "\nDeveloper Details: " + developerFirstName + " " + developerLastName +
                 "\nTask Number: " + taskNumber + "\nTask Name: " + taskName +
                 "\nTask Description: " + taskDescription + "\nTask ID: " + taskID +
@@ -39,6 +37,26 @@ public class Task {
 
     public void setTaskStatus(WorkerClass.TaskStatus taskStatus) {
         this.taskStatus = taskStatus;
+    }
+
+    public WorkerClass.TaskStatus getTaskStatus() {
+        return taskStatus;
+    }
+
+    public String getTaskName() {
+        return taskName;
+    }
+
+    public String getDeveloperFirstName() {
+        return developerFirstName;
+    }
+
+    public String getDeveloperLastName() {
+        return developerLastName;
+    }
+
+    public String getTaskID() {
+        return taskID;
     }
 }
 
