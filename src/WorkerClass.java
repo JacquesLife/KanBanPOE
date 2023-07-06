@@ -5,16 +5,18 @@ ArrayList<Task> tasks is used to store the tasks that are created.
 addTask() is used to add a task to the tasks' arraylist.
 displayTasks() is used to display the tasks in the tasks' arraylist.
 calculateTotalHours() is used to calculate the total hours of all the tasks in the tasks' arraylist.
-saveUsers() is used to save the users to a file.
-saveTasks() is used to save the tasks to a file.
-loadUsers() is used to load the users from a file.
-loadTasks() is used to load the tasks from a file.
 performLoginOrRegister() is used to perform the login or register operation.
 performOperations() is used to perform the add task, display tasks, calculate total hours, save users, save tasks, load users and load tasks operations.
-*/
-import javax.swing.*;
+ChatGPT was used to help
+ */
+package poekanban;
+import javax.swing.JOptionPane;
 import java.util.ArrayList;
 
+/**
+ *
+ * @author jacques
+ */
 public class WorkerClass {
     private final Backend backend;
     private final Login login;
@@ -27,19 +29,15 @@ public class WorkerClass {
     }
 
     public WorkerClass() {
-        // create a backend object and a login object
         backend = new Backend();
         login = new Login();
         tasks = new ArrayList<>();
     }
 
     public void performLoginOrRegister() {
-        // load users from file
         backend.loadUsers();
 
-
         String[] options = {"Login", "Register"};
-        // display a dialog box to ask the user if they want to log in or register
         int choice = JOptionPane.showOptionDialog(
                 null,
                 "Login or Register",
@@ -53,9 +51,7 @@ public class WorkerClass {
 
         boolean userExists = false;
 
-
         while (!userExists) {
-            // ask the user for their username and password
             String username;
             while (true) {
                 username = JOptionPane.showInputDialog("Enter username");
@@ -72,7 +68,6 @@ public class WorkerClass {
                 password = JOptionPane.showInputDialog("Enter password");
 
                 if (choice == 0 || login.checkPasswordComplexity(password)) {
-                    // if the user is logging in the password must match the complexity requirements
                     break;
                 }
 
@@ -80,17 +75,14 @@ public class WorkerClass {
             }
 
             if (choice == 0) {
-                // if the user is logging in check if the user exists
                 if (backend.isUserValid(username, password)) {
                     userExists = true;
                     ArrayList<String> user = backend.getUser(username);
                     JOptionPane.showMessageDialog(null, "Welcome " + user.get(2) + " " + user.get(3));
                 } else {
-                    // if the user does not exist display an error message
                     JOptionPane.showMessageDialog(null, "Invalid username or password");
                 }
             } else {
-                // if the user is registering check if the user exists
                 String firstName = JOptionPane.showInputDialog("Enter first name");
                 String lastName = JOptionPane.showInputDialog("Enter last name");
 
@@ -103,11 +95,9 @@ public class WorkerClass {
     }
 
     public void addTasks() {
-        // add tasks
         boolean quit = false;
 
         while (!quit) {
-            // prompt for task name, description, developer name, duration, and status
             String taskName = "Login Feature";
             String taskDescription = TaskDescription.getTaskDescription();
 
@@ -115,7 +105,6 @@ public class WorkerClass {
             String developerLastName = JOptionPane.showInputDialog("Enter developer's last name");
 
             int taskDuration;
-            // prompt for task duration
             while (true) {
                 try {
                     taskDuration = Integer.parseInt(JOptionPane.showInputDialog("Enter task duration in hours"));
@@ -128,7 +117,6 @@ public class WorkerClass {
             String taskID = createTaskID(taskName, tasks.size() + 1, developerLastName);
             Task task = new Task(taskName, tasks.size() + 1, taskDescription, developerFirstName, developerLastName, taskDuration, taskID);
 
-            // Prompt for task status
             String[] statusOptions = {"ToDo", "Doing", "Done"};
             int statusChoice = JOptionPane.showOptionDialog(
                     null,
@@ -142,7 +130,6 @@ public class WorkerClass {
             );
 
             switch (statusChoice) {
-                // set the task status based on the user's choice
                 case 1 -> task.setTaskStatus(TaskStatus.DOING);
                 case 2 -> task.setTaskStatus(TaskStatus.DONE);
                 default -> task.setTaskStatus(TaskStatus.TODO);
@@ -153,10 +140,9 @@ public class WorkerClass {
             JOptionPane.showMessageDialog(null, "Task successfully captured\n\n" + task.printTaskDetails());
 
             int choice;
-            // prompt the user to add more tasks or quit
             while (true) {
                 try {
-                    choice = Integer.parseInt(JOptionPane.showInputDialog("Choose an option:\n1) Add tasks\n2) Show report\n3) Calculate total hours\n4) Quit"));
+                    choice = Integer.parseInt(JOptionPane.showInputDialog("Choose an option:\n1) Add tasks\n2) Show report\n3) Calculate total hours\n4) Finished tasks\n5) Longest tasks\n6) Delete task\n7) Search task by name\n8) Quit"));
                     break;
                 } catch (NumberFormatException e) {
                     JOptionPane.showMessageDialog(null, "Invalid input. Please enter a valid number.");
@@ -164,7 +150,6 @@ public class WorkerClass {
             }
 
             switch (choice) {
-                // if the user chooses to quit or show the report set the quit flag to true to exit the loop
                 case 1:
                     break;
                 case 2:
@@ -173,11 +158,23 @@ public class WorkerClass {
                 case 3:
                     int totalHours = calculateTotalHours();
                     JOptionPane.showMessageDialog(null, "Total hours: " + totalHours);
-                    quit = true; // Set the quit flag to true to exit the loop
+                    quit = true;
                     break;
                 case 4:
+                    finishedTasks();
+                    break;
+                case 5:
+                    longestTasks();
+                    break;
+                case 6:
+                    deleteTask();
+                    break;
+                case 7:
+                    searchTaskByName();
+                    break;
+                case 8:
                     JOptionPane.showMessageDialog(null, "Goodbye!");
-                    quit = true; // Set the quit flag to true to exit the loop
+                    quit = true;
                     break;
                 default:
                     JOptionPane.showMessageDialog(null, "Invalid choice");
@@ -185,16 +182,13 @@ public class WorkerClass {
         }
     }
 
-
     public static class TaskDescription {
-        // prompt for task description
         public static String getTaskDescription() {
             String taskDescription;
             while (true) {
                 taskDescription = JOptionPane.showInputDialog("Enter task description");
 
                 if (taskDescription.length() <= 50) {
-                    // if the task description is less than 50 characters break out of the loop
                     break;
                 }
 
@@ -204,15 +198,11 @@ public class WorkerClass {
         }
     }
 
-
     String createTaskID(String taskName, int taskNumber, String developerLastName) {
-        // create task ID
         return taskName.substring(0, 2).toUpperCase() + ":" + taskNumber + ":" + developerLastName.substring(developerLastName.length() - 3).toUpperCase();
     }
 
-
     public int calculateTotalHours() {
-        // calculate total hours
         int totalHours = 0;
         for (Task task : tasks) {
             totalHours += task.getTaskDuration();
@@ -221,24 +211,125 @@ public class WorkerClass {
     }
 
     public void showReport() {
-        // show report
-        JOptionPane.showMessageDialog(null, "Coming Soon");
+        if (tasks.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No tasks found.");
+        } else {
+            StringBuilder report = new StringBuilder();
+            report.append("Task Report:\n");
+            for (Task task : tasks) {
+                report.append("Task Name: ").append(task.getTaskName()).append("\n");
+                report.append("Developer: ").append(task.getDeveloperFirstName()).append(" ").append(task.getDeveloperLastName()).append("\n");
+                report.append("Task Duration: ").append(task.getTaskDuration()).append(" hours\n");
+                report.append("Status: ").append(task.getTaskStatus()).append("\n");
+                report.append("\n");
+            }
+            JOptionPane.showMessageDialog(null, report.toString());
+        }
 
         performOperations();
     }
 
+    public void finishedTasks() {
+        StringBuilder finishedTasks = new StringBuilder("Finished Tasks:\n\n");
+        boolean found = false;
+
+        for (Task task : tasks) {
+            if (task.getTaskStatus() == TaskStatus.DONE) {
+                finishedTasks.append(task.printTaskDetails()).append("\n\n");
+                found = true;
+            }
+        }
+
+        if (!found) {
+            finishedTasks.append("No finished tasks found.");
+        }
+
+        JOptionPane.showMessageDialog(null, finishedTasks.toString());
+
+        performOperations();
+    }
+
+    public void longestTasks() {
+        int maxDuration = 0;
+        ArrayList<Task> longestTasks = new ArrayList<>();
+
+        for (Task task : tasks) {
+            if (task.getTaskDuration() > maxDuration) {
+                maxDuration = task.getTaskDuration();
+                longestTasks.clear();
+                longestTasks.add(task);
+            } else if (task.getTaskDuration() == maxDuration) {
+                longestTasks.add(task);
+            }
+        }
+
+        if (longestTasks.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No tasks found.");
+        } else {
+            StringBuilder longestTaskDetails = new StringBuilder("Longest Tasks:\n\n");
+            for (Task task : longestTasks) {
+                longestTaskDetails.append(task.printTaskDetails()).append("\n");
+            }
+            JOptionPane.showMessageDialog(null, longestTaskDetails.toString());
+        }
+
+        performOperations();
+    }
+
+    public void deleteTask() {
+        String taskNameToDelete = JOptionPane.showInputDialog("Enter the task name to delete");
+
+        boolean found = false;
+        Task taskToRemove = null;
+        for (Task task : tasks) {
+            if (task.getTaskName().equalsIgnoreCase(taskNameToDelete)) {
+                taskToRemove = task;
+                found = true;
+                break;
+            }
+        }
+
+        if (found) {
+            tasks.remove(taskToRemove);
+            JOptionPane.showMessageDialog(null, "Task deleted successfully");
+        } else {
+            JOptionPane.showMessageDialog(null, "Task not found");
+        }
+
+        performOperations();
+    }
+
+    public void searchTaskByName() {
+    String searchTerm = JOptionPane.showInputDialog("Enter the task name or developer name to search");
+
+    boolean found = false;
+    StringBuilder searchResults = new StringBuilder("Search Results:\n\n");
+
+    for (Task task : tasks) {
+        if (task.getTaskName().equalsIgnoreCase(searchTerm) || task.getDeveloperFirstName().equalsIgnoreCase(searchTerm)) {
+            searchResults.append(task.printTaskDetails()).append("\n");
+            found = true;
+        }
+    }
+
+    if (!found) {
+        searchResults.append("No tasks found with the given name or developer.");
+    }
+
+    JOptionPane.showMessageDialog(null, searchResults.toString());
+
+    performOperations();
+}
+
     public void performOperations() {
-        // perform operations
         JOptionPane.showMessageDialog(null, "Welcome to EasyKanban");
 
         int choice;
         boolean quit = false;
-        // Exit the loop immediately if quit is true
         do {
             while (true) {
                 try {
-                    // prompt the user to add tasks, show the report, calculate total hours, or quit
-                    choice = Integer.parseInt(JOptionPane.showInputDialog("Choose an option:\n1) Add tasks\n2) Show report\n3) Calculate total hours\n4) Quit"));
+                    choice = Integer.parseInt(JOptionPane.showInputDialog("Choose an option:\n1) Add tasks\n2) Show report\n3) Calculate total hours\n4) Finished tasks\n5) Longest tasks\n6) Delete task\n7) Search task by name\n8) Quit"));
                     break;
                 } catch (NumberFormatException e) {
                     JOptionPane.showMessageDialog(null, "Invalid input. Please enter a valid number.");
@@ -246,14 +337,17 @@ public class WorkerClass {
             }
 
             switch (choice) {
-                // perform the operation based on the user's choice
                 case 1 -> addTasks();
                 case 2 -> showReport();
                 case 3 -> {
                     int totalHours = calculateTotalHours();
                     JOptionPane.showMessageDialog(null, "Total hours: " + totalHours);
                 }
-                case 4 -> {
+                case 4 -> finishedTasks();
+                case 5 -> longestTasks();
+                case 6 -> deleteTask();
+                case 7 -> searchTaskByName();
+                case 8 -> {
                     JOptionPane.showMessageDialog(null, "Goodbye!");
                     quit = true;
                 }
@@ -262,9 +356,7 @@ public class WorkerClass {
 
         } while (!quit);
 
-
         System.exit(0);
-        // Exit the application
     }
 
     public static void main(String[] args) {
