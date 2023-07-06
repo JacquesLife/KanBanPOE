@@ -9,14 +9,10 @@ performLoginOrRegister() is used to perform the login or register operation.
 performOperations() is used to perform the add task, display tasks, calculate total hours, save users, save tasks, load users and load tasks operations.
 ChatGPT was used to help
  */
-package poekanban;
+
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
 
-/**
- *
- * @author jacques
- */
 public class WorkerClass {
     private final Backend backend;
     private final Login login;
